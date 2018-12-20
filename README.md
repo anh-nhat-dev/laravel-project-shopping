@@ -19,7 +19,7 @@ $ cd laravel-project-shopping
 ```
 $ composer install
 ```
-- Step 3: Coppy file `.env.example` and rename to `.env`
+- Step 3: Copy file `.env.example` and rename to `.env`
 ```
 $ cp .env.example .env
 ```
