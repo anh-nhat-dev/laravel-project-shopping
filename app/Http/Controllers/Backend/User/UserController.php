@@ -9,6 +9,10 @@ use App\Http\Requests\User\{AddUserRequest,EditUserRequest};
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkuserdestroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(1);
+        $users = User::paginate(10);
         return view('backend.user.index', compact('users'));
     }
 
@@ -92,6 +96,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete($id);
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with(['success' => 'Xóa tài khoản thành công']);
     }
 }
