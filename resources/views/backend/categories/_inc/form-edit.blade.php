@@ -9,16 +9,16 @@
             <div class="form-group">
                 <label class="col-md-12">Parent <span class="help text-danger">*</span></label>
                 <div class="col-md-12">
-                    <select class="selectpicker" name="parent_id" class="form-control form-control-line">
+                    <select class="form-control form-control-line" name="parent_id" >
                             <option value="0">None</option>
-                            @foreach ($cates as $cate)
-                                <option value="{{$cate->id}}">{{$cate->name}}</option>
+                            @foreach ($cates as $category)
+                                <option @if ($category->id == $cate->parent_id) selected  @endif value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-12">Mô tả danh mục<span class="help text-danger">*</span></label>
+                <label class="col-md-12">Description<span class="help text-danger">*</span></label>
                 <div class="col-md-12">
                 <textarea id="mymce" name="description">{{$cate->description}}</textarea>
                 </div>

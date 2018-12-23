@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AddCategoryRequest extends FormRequest
 {
+    use \App\Support\AddSlugToRequest;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +14,7 @@ class AddCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,9 @@ class AddCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'slug' => "required|unique:categories,slug",
+            'description' => 'required'
         ];
     }
 }

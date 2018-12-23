@@ -19,7 +19,7 @@
     <div class="col-sm-12">
         <div class="panel panel-default block1">
             <div class="panel-heading">
-                <a href="http://localhost:8000/admin/categories/add" class="btn btn-success" id="unblockbtn1"><i class="icon-plus"></i>
+            <a href="{{route('admin.categories.create')}}" class="btn btn-success" id="unblockbtn1"><i class="icon-plus"></i>
                     Create</a>
             </div>
             <div class="panel-wrapper collapse in">

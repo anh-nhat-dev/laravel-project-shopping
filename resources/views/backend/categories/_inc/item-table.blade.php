@@ -7,8 +7,12 @@
     <a href="{{route('admin.categories.edit', ['category' => $cate->id])}}" class="btn btn-info "><i
                 class="icon-pencil"></i>
         </a>
-        <a href="http://localhost:8000/admin/categories/1/delete" class="btn btn-danger"><i
-                class="icon-trash"></i>
-        </a>
+        <form method="POST" class="d-inline" action="{{route('admin.categories.destroy', ['id' => $cate->id])}}">
+                <input type="hidden" value="DELETE" name="_method" >
+                @csrf
+                <button class="btn btn-danger"><i
+                    class="icon-trash"></i>
+                </button>
+            </form>
     </td>
 </tr>

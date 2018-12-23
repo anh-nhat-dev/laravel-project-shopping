@@ -30,7 +30,8 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         app('view')->composer([
             'backend.categories.index',
-            'backend.categories.edit'
+            'backend.categories.edit',
+            'backend.categories.add'
         ], \App\Composers\CatesComposers::class);
     }
 }

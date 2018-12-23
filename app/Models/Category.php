@@ -13,10 +13,10 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'slug', 'parent'
+        'name', 'description', 'slug', 'parent_id'
     ];
 
-    
+
     public function childrend()
     {
         return $this->hasMany(static::class,'parent_id', 'id');
