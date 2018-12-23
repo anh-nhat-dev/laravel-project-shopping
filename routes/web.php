@@ -34,4 +34,5 @@ Route::group([
 ], function(){
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::resource('users', 'User\UserController');
+    Route::resource('categories', 'Categories\CategoriesController');
 });
