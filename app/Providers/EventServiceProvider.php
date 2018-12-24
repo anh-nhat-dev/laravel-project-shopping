@@ -31,4 +31,27 @@ class EventServiceProvider extends ServiceProvider
 
         //
     }
+
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerEvent();
+    }
+
+    public function registerEvent()
+    {
+        $this->app['events']->listen(
+            \App\Events\Products\ProductCreate::class,
+            \App\Listeners\Products\CreateAttributeProduct::class
+        );
+
+        $this->app['events']->listen(
+            \App\Events\Products\ProductUpdate::class,
+            \App\Listeners\Products\UpdateAttributeProduct::class
+        );
+    }
 }
