@@ -35,4 +35,5 @@ Route::group([
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::resource('users', 'User\UserController');
     Route::resource('categories', 'Categories\CategoriesController');
+    Route::resource('products', 'Products\ProductController');
 });
