@@ -37,7 +37,7 @@
                                     <div class="form-group">
                                         <label class="col-md-12">Is Sale</label>
                                         <div class="col-md-12">
-                                            <input type="checkbox" name="is_sale" @if ($product->is_sale == 'true')
+                                            <input value="true" type="checkbox" name="is_sale" @if ($product->is_sale == 'true')
                                             checked @endif class="js-switch"
                                             data-color="#36c6d3" data-size="small" />
                                         </div>
@@ -46,7 +46,7 @@
                                         <div class="form-group m-r-20">
                                             <label>Regular Price <span class="help text-danger">*</span></label>
                                             <div>
-                                                <input name="regular_price" type="number" class="form-control" value="{{$product->price}}">
+                                                <input name="price" type="number" class="form-control" value="{{$product->price}}">
                                             </div>
                                         </div>
                                     </div>
@@ -164,7 +164,7 @@
             <div class="panel-heading">Categories</div>
             <div class="panel-wrapper collapse in">
                 <div class="panel-body">
-                    <select class="selectpicker" name="category_id" data-style="form-control">
+                    <select class="selectpicker" name="categories_id" data-style="form-control">
                         @foreach ($cates as $category)
                         <option @if ($product->categories_id == $category->id) selected @endif
                             value="{{$category->id}}">{{$category->name}}</option>

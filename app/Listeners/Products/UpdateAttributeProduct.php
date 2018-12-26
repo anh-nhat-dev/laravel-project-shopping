@@ -88,9 +88,7 @@ class UpdateAttributeProduct
     public function updateSku($event)
     {
         $skus = collect(app('request')->input('skus'));
-        // dd($skus);
         $skus->each(function ($item, $key) use ($event) {
-            // dd($item);
             $sku = $event->product->skus()->updateOrCreate(['id' => $item['id']], $item);
             if(isset($item['values'])){
                 foreach($item['values'] as $att) {

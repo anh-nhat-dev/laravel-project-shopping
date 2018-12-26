@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Product;
 
-use App\Http\Requests\Products\AddProductRequest;
+use App\Http\Requests\Products\{AddProductRequest, UpdateProductRequest};
 
 
 class ProductController extends Controller
@@ -42,7 +42,21 @@ class ProductController extends Controller
     public function store(AddProductRequest $request)
     {
         $product = Product::create($request->all());
+        $product->image()->create(
+            ['type' => 'thumbnail', 'zone' => 'product', 'link' => $request->thumbnail]
+        );
 
+        $gallerys = $request->gallery ?? [];
+
+        foreach($gallerys as $image){
+            $img = $product->images()->create(
+            [
+                'type' => 'gallery',
+                'zone' => 'product', 
+                'link' => $image['link'],
+            ]
+        );
+        }
         event(new \App\Events\Products\ProductCreate($product));
 
         return redirect()
@@ -80,7 +94,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         // dd($request->all());
         $product = Product::findOrFail($id);
@@ -92,6 +106,7 @@ class ProductController extends Controller
         );
         
         $gallerys = $request->gallery ?? [];
+
         $ids = [];
         foreach($gallerys as $image){
             $img = $product->images()->updateOrCreate(
@@ -140,6 +155,7 @@ class ProductController extends Controller
         $product->attr()->delete();
         $product->skus()->delete();
 
+        
         $product->delete();
 
         return redirect()

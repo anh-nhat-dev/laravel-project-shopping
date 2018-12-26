@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use \App\Support\ImageTrait;
+
+
     protected $fillable = [
         'name',
         'description',
@@ -57,5 +59,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(\App\Models\Image::class, 'id_ref', 'id');
+    }
+    
+    public function scopePublic($query)
+    {
+        $query->where('status', 'public');
     }
 }

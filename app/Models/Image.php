@@ -13,7 +13,7 @@ class Image extends Model
         'zone'
       ];
 
-      public function scopeThumbnail($query)
+    public function scopeThumbnail($query)
     {
         return $query->where('type', 'thumbnail');
     }

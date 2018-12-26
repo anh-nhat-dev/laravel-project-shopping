@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Frontend\HomeController@index')->name('home');
+
 
 Route::get('/logout', 'LoginController@logout')->name('logout');
 
@@ -37,3 +36,5 @@ Route::group([
     Route::resource('categories', 'Categories\CategoriesController');
     Route::resource('products', 'Products\ProductController');
 });
+
+
