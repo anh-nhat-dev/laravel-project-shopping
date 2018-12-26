@@ -18,21 +18,21 @@
                 </ul>
             </li>
             <li class="nav-small-cap m-t-10">--- Main Menu</li>
-            <li><a href="http://localhost:8000/admin" class="waves-effect"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i>
+        <li><a href="{{route('admin.dashboard')}}" class="waves-effect"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i>
             <span class="hide-menu">Dashboard</span></a></li>
             <li> <a href="" class="waves-effect "><i  class="fa fa-cubes"></i>
             <span class="hide-menu">Products<span class="fa arrow"></span> 
             </span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="http://localhost:8000/admin/products">List Products</a></li>
-                    <li><a href="http://localhost:8000/admin/products/add">Add products</a></li>
+                <li><a href="{{route('admin.products.index')}}">List Products</a></li>
+                    <li><a href="{{route('admin.products.create')}}">Add products</a></li>
                 </ul>
             </li>
             <li> <a href="" class="waves-effect"><i  class="icon-folder-alt"></i>
             <span class="hide-menu">Categories<span class="fa arrow"></span></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="http://localhost:8000/admin/categories">List Categories</a></li>
-                    <li><a href="http://localhost:8000/admin/categories/add">Add Categories</a></li>
+                    <li><a href="{{route('admin.categories.index')}}">List Categories</a></li>
+                    <li><a href="{{route('admin.categories.create')}}">Add Categories</a></li>
                 </ul>
             </li>
             <li> <a href="http://localhost:8000/admin/orders" class="waves-effect"><i class="icon-drawar"></i>
@@ -42,8 +42,8 @@
             <li> <a href="" class="waves-effect"><i class="icon-people"></i>
             <span class="hide-menu">Users<span class="fa arrow"></span></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="http://localhost:8000/admin/users">List Users</a></li>
-                    <li><a href="http://localhost:8000/admin/users/add">Add Users</a></li>
+                    <li><a href="{{route('admin.users.index')}}">List Users</a></li>
+                <li><a href="{{route('admin.users.create')}}">Add Users</a></li>
                 </ul>
             </li>
 

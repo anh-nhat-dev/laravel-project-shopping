@@ -38,24 +38,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>#1</td>
-                                    <td>Sản phẩm số 1</td>
-                                    <td>
-                                        <img src="http://localhost:8000/files/3.png" width="50" alt="">
-                                    </td>
-                                    <td>₫1.400.000</td>
-                                    <td>Danh mục số 2</td>
-                                    <td>10-12-2018</td>
-                                    <td><span class="label label-success label-rounded">ACTIVE</span></td>
-                                    <td>
-                                        <a href="http://localhost:8000/admin/products/1/edit" class="btn btn-info "><i class="icon-pencil"></i>
-</a>
-                                        <a href="http://localhost:8000/admin/products/1/delete" class="btn btn-danger"><i class="icon-trash"></i>
-</a>
-                                    </td>
-
-                                </tr>
+                                @each('backend.products._inc.item-table', $products, 'product')
                             </tbody>
                         </table>
                     </div>

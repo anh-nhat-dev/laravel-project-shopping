@@ -19,7 +19,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('backend.products.index');
+        $products = Product::paginate(10);
+        return view('backend.products.index', compact('products'));
     }
 
     /**
@@ -38,10 +39,15 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddProductRequest $request)
     {
-        dd($request->all());
-        Product::create($request->all());
+        $product = Product::create($request->all());
+
+        event(new \App\Events\Products\ProductCreate($product));
+
+        return redirect()
+            ->route('admin.products.index')
+            ->with('success', 'Thêm mới thành cồng');
     }
 
     /**
@@ -63,7 +69,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.products.edit');
+        $product = Product::findOrFail($id);
+        return view('backend.products.edit', compact('product'));
     }
 
     /**
@@ -75,7 +82,42 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $product = Product::findOrFail($id);
+        $product->update($request->all());
+
+        $product->image()->updateOrCreate(
+            ['type' => 'thumbnail', 'zone' => 'product'], 
+            ['type' => 'thumbnail', 'zone' => 'product', 'link' => $request->thumbnail]
+        );
+        
+        $gallerys = $request->gallery ?? [];
+        $ids = [];
+        foreach($gallerys as $image){
+            $img = $product->images()->updateOrCreate(
+            [   'type' => 'gallery', 
+                'zone' => 'product',
+                'id'   => $image['id'] ?? null
+            ],
+            [
+                'type' => 'gallery',
+                'zone' => 'product', 
+                'link' => $image['link'],
+            ]
+        );
+            $ids[] = $img->id;
+        }
+        $product->image()
+            ->where('type','gallery')
+            ->where('zone','product')
+            ->whereNotIn('id',$ids)
+            ->delete();
+
+        event(new \App\Events\Products\ProductUpdate($product));
+
+        return redirect()
+            ->route('admin.products.index')
+            ->with('success', 'Cập nhật thành công');
     }
 
     /**
@@ -86,6 +128,22 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $product->attr->each(function($item){
+            $item->values()->delete();
+        }); 
+        
+        $product->skus()->each(function($item){
+            $item->values()->delete();
+        });
+        $product->attr()->delete();
+        $product->skus()->delete();
+
+        $product->delete();
+
+        return redirect()
+            ->route('admin.products.index')
+            ->with('success', 'Xóa thành công');
     }
 }

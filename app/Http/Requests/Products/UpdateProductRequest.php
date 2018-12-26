@@ -4,9 +4,8 @@ namespace App\Http\Requests\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
-    use \App\Support\AddSlugToRequest;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,7 +25,7 @@ class AddProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'slug' => 'required|unique:products,slug',
+            'slug' => "required|unique:products,slug,{$this->segment(3)},id",
             'price' => 'required|numeric',
             'sale_price' => 'required|numeric',
             'categories_id' => 'required|numeric',

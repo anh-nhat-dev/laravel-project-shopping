@@ -45,7 +45,7 @@ class UserController extends Controller
         $user = User::create($request->all());
         return redirect()
             ->route('admin.users.index')
-            ->with(['success' => 'Tạo tài khoản thành công']);
+            ->with('success','Tạo tài khoản thành công');
     }
 
     /**
@@ -85,7 +85,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.users.index')
-            ->with(['success' => 'Cập nhật tài khoản thành công']);
+            ->with('success' ,'Cập nhật tài khoản thành công');
     }
 
     /**
@@ -101,6 +101,6 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.users.index')
-            ->with(['success' => 'Xóa tài khoản thành công']);
+            ->with('success' ,'Xóa tài khoản thành công');
     }
 }

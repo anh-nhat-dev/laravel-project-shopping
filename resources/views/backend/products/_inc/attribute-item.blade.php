@@ -23,4 +23,5 @@
             </div>
         </div>
     </div>
+    <input type="hidden" name="value_id" >
 </div>
