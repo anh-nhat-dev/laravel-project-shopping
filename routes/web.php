@@ -16,6 +16,14 @@ Route::get('/chi-tiet/{slug}', 'Frontend\HomeController@productDetail')->name('p
 Route::get('/cua-hang', 'Frontend\ShopController@index')->name('shop');
 Route::post('/reviews/{id}', 'Frontend\ShopController@reviews')->name('reviews');
 
+Route::group([
+    'prefix' => 'gio-hang',
+    'as' => 'carts.'
+], function(){
+    Route::post('/add-to-cart', 'Frontend\CartController@addToCart')->name('add-cart');
+    Route::get('/', 'Frontend\CartController@index')->name('list');
+});
+
 Route::get('/logout', 'LoginController@logout')->name('logout');
 
 Route::group([

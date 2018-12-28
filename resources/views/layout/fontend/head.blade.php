@@ -19,7 +19,7 @@
                             <li><a href="blog.html">Tin tức</a></li>
                             <li><a href="about.html">Giới thiệu</a></li>
                             <li><a href="contact.html">Liên hệ</a></li>
-                            <li><a href=""><i class="icon-shopping-cart"></i> Giỏ hàng []</a></li>
+                            <li><a href="{{route('carts.list')}}"><i class="icon-shopping-cart"></i> Giỏ hàng [{{$carts->count()}}]</a></li>
                         </ul>
                     </div>
                 </div>

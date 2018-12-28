@@ -35,5 +35,10 @@ class ViewComposerServiceProvider extends ServiceProvider
             'backend.products.add',
             'backend.products.edit'
         ], \App\Composers\CatesComposers::class);
+
+        app('view')->composer([
+            'layout.fontend.head',
+            'frontend.carts'
+        ], \App\Composers\CartComposers::class);
     }
 }

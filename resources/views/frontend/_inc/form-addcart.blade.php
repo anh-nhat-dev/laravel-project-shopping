@@ -1,4 +1,4 @@
-<form class="row row-pb-lg" action="" method="POST">
+<form class="row row-pb-lg" action="{{route('carts.add-cart')}}" method="POST">
         <div class="col-md-10 col-md-offset-1">
             <div class="product-detail-wrap">
                 <div class="row">
@@ -11,7 +11,6 @@
                                 @foreach ($product->gallery as $item)
                                 <a href="#" class="thumb-img" style="background-image: url({{asset($item->link)}});"></a>
                                 @endforeach
-                                
                             </div>
                         </div>
                     </div>
@@ -70,7 +69,7 @@
                                 </div>
                             </div>
                             <p><a type="submit"  id="addtocart" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Thêm vào giỏ hàng</a></p>
-                            <input type="hidden" name="product_id" value="{{$product->product_id}}">
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
                             <input type="hidden" name="sku_id" value="" id="sku_id">
                             <button id="buttonaddtocart" class="hidden" type="submit">Add to cart</button>
                             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
