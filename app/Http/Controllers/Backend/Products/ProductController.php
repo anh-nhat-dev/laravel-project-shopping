@@ -42,6 +42,7 @@ class ProductController extends Controller
     public function store(AddProductRequest $request)
     {
         $product = Product::create($request->all());
+        
         $product->image()->create(
             ['type' => 'thumbnail', 'zone' => 'product', 'link' => $request->thumbnail]
         );

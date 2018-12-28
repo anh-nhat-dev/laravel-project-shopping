@@ -12,4 +12,12 @@ class SkuValue extends Model
         'value_id',
         'attribute_id'
     ];
+
+    protected $with = ['value'];
+
+    //Lấy chi tiết giá trị
+    public function value()
+    {
+        return $this->belongsTo(\App\Models\ProductAttributeValue::class, 'value_id', 'id');
+    }
 }

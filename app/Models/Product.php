@@ -65,4 +65,15 @@ class Product extends Model
     {
         $query->where('status', 'public');
     }
+
+    //Lấy giá trị của biến thể
+    public function skusvalues()
+    {
+        return $this->hasMany(\App\Models\SkuValue::class, 'product_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(\App\Models\Review::class, 'product_id');
+    }
 }

@@ -37,4 +37,9 @@ class User extends Authenticatable
         }
        $this->attributes['password'] = bcrypt(app('request')->input('password'));
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(\App\Models\Review::class, 'user_id');
+    }
 }

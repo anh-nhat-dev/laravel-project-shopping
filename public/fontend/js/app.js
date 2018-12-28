@@ -33,22 +33,22 @@ function addEventForSize()
                 let sku = listSku.find((item) => {
                     return item.values.find(el => el.value_id === size_id);
                 })
-                if (sku.stock > 0) {
+                if (sku.quantity > 0) {
                     $('#quantity').show()
                     $('#addtocart').show()
                     let quantity = $('#quantity').val()
-                    if (quantity >= sku.stock) {
-                        $('#quantity').val(sku.stock)
+                    if (quantity >= sku.quantity) {
+                        $('#quantity').val(sku.quantity)
                     }
 
-                    $('#quantity').attr('max', sku.stock)
+                    $('#quantity').attr('max', sku.quantity)
                     
                 } else {
                     $('#quantity').hide()
                     $('#addtocart').hide()
                 }
-                $('#sku_id').val(sku.sku_id)
-                console.log(sku.sku_id)
+                $('#sku_id').val(sku.id)
+
                 $('#size').find('a.active').eq(0).removeClass('active')
                 ev.preventDefault()
                 $('#size').find('input').eq(0).val(size_id)

@@ -12,7 +12,9 @@
 */
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
-
+Route::get('/chi-tiet/{slug}', 'Frontend\HomeController@productDetail')->name('product.detail');
+Route::get('/cua-hang', 'Frontend\ShopController@index')->name('shop');
+Route::post('/reviews/{id}', 'Frontend\ShopController@reviews')->name('reviews');
 
 Route::get('/logout', 'LoginController@logout')->name('logout');
 
