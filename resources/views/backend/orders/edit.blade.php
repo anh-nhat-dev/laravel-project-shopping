@@ -25,7 +25,7 @@
                                 <div class="col-md-12">
                                     <select class="selectpicker" name="status"  data-style="form-control">
                                         <option @if($order->status == 'pending') selected @endif  @if($order->status != 'pending') disabled @endif value="completed">Pending</option>
-                                        <option @if($order->status == 'shipping') selected @endif  @if($order->status != 'pending') disabled @endif value="processing">Shipping</option>
+                                        <option @if($order->status == 'shipping') selected @endif  @if($order->status != 'pending') disabled @endif value="shipping">Shipping</option>
                                         <option @if($order->status == 'complated') selected @endif @if($order->status == 'cancled')disabled @endif value="complated">Complate</option>
                                         <option @if($order->status == 'cancled') selected @endif @if($order->status == 'complated') disabled @endif value="cancled">Cancle</option>
                                         
@@ -53,7 +53,7 @@
                             <tbody>
                                 @foreach ($order->details as $key => $item)
                                 <tr>
-                                        <td class="text-center">{{$key}}</td>
+                                        <td class="text-center">{{$item->id}}</td>
                                         <td>{{$item->product->name}}
                                                 @if(isset($item->sku->values))
                                                     @foreach ($item->sku->values as $value)

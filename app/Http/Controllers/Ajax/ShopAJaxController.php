@@ -10,14 +10,14 @@ class ShopAJaxController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::active()
+        $products = Product::public()
             ->cates($request->category_id)
             ->rangerprice($request->min, $request->max)
             ->color($request->color)
             ->size($request->size)
             ->paginate(12);
 
-        $view = view('fontend.components.shop-products', compact('products'))->render();
+        $view = view('frontend._inc.shop-product', compact('products'))->render();
 
         return response()->json(['content' => $view], 200);
     }

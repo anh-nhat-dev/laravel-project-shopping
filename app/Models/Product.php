@@ -76,4 +76,44 @@ class Product extends Model
     {
         return $this->hasMany(\App\Models\Review::class, 'product_id');
     }
+
+    public function scopeCates($query, $cate_id = null)
+    {
+        if (is_null($cate_id)){
+            return $query;
+        }
+        return $query->where('categories_id', $cate_id);
+    }
+
+    public function scopeRangerPrice($query, $min = null, $max = null)
+    {
+        if (is_null($min) || is_null($min)){
+            return $query;
+        }
+        return $query->whereBetween('sale_price', [$min, $max]);
+    }
+
+    public function scopeColor($query, $color = null)
+    {
+        if (is_null($color)) {
+            return $query;
+        }
+        return $query->whereHas('skusvalues', function($query) use ($color){
+            $query->whereHas('value', function ($query) use ($color){
+                $query->where('value', $color);
+            });
+        });
+    }
+
+    public function scopeSize($query, $size = null)
+    {
+        if (is_null($size)) {
+            return $query;
+        }
+        return $query->whereHas('skusvalues', function($query) use ($size){
+            $query->whereHas('value', function ($query) use ($size){
+                $query->where('value', $size);
+            });
+        });
+    }
 }
