@@ -97,8 +97,8 @@
 	<script src="js/main.js"></script>
 
 	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-	{{-- <script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script> --}}
-	{{-- @include('notifications::notifications') --}}
+	<script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+	@include('layout.backend.components.notifications')
 	<script src="js/app.js"></script>
 	<script>
 		$(document).ajaxStart(function(){
@@ -117,12 +117,12 @@
 		function loadProductAjax(id)
 		{
 			$.ajax({
-				url: '',
+				url: '{{route('ajax.product')}}',
 				type: 'GET',
 				data: {id}
 			})
 			.done(function(data){
-				
+				console.log(data)
 				$('#myModal').html(data.content).modal()
 			
 			})

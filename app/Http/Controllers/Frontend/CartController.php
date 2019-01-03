@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\{Product, Cart};
 
+
 class CartController extends Controller
 {
     public function addToCart(Request $request)
@@ -42,5 +43,49 @@ class CartController extends Controller
         $totalPrice = 0;
         $totalSale = 0;
         return view('frontend.carts', compact('totalPrice', 'totalSale'));
+    }
+
+    public function checkout()
+    {
+        $totalPrice = 0;
+        return view('frontend.checkout', compact('totalPrice'));
+    }
+
+    public function order(\App\Http\Requests\Order\AddOrderRequest $request)
+    {
+
+        $bill = $request->all();
+
+        $user_id = $request->user()->id;
+        
+        $carts = Cart::where('user_id', $user_id)->get();
+  
+        $totalPrice = $carts->reduce(function($carry,$item ){
+            return  ($item->price * $item->quantity) + $carry;
+        }, 0);
+
+        $order = [
+            'total_price' => $totalPrice
+        ];
+
+        $data = array_merge($bill, $order);
+        $order = $request->user()->orders()->create($data);
+
+        $carts->each(function ($item) use ($order){
+            $total = ($item->price * $item->quantity);
+            $cart = array_merge($item->toArray(), ['total_price' =>$total ]);
+            $order->details()->create($cart);
+            $item->delete();
+        });
+
+        return redirect()
+            ->route('carts.success')
+            ->with(['order' => $order]);
+    }
+
+    public function checkoutSuccess()
+    {
+        $order = session('order');
+        return view('frontend.complate', compact('order'));
     }
 }

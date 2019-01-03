@@ -1,57 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend\Order;
 
 use Illuminate\Http\Request;
-use Auth;
+use App\Http\Controllers\Controller;
 
-class LoginController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $request = $request->all();
-        return view('login.index', compact('request'));
+        $orders = \App\Models\Order::all();
+
+        return view('backend.orders.index', compact('orders'));
     }
 
-    /**
-     * Xử lý login khi người dùng nhấn button
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function login(Request $request)
-    {
-
-        if (Auth::attempt($request->only('email', 'password'))) {
-            
-            if (!empty($request->redirect)) {
-                return redirect($request->redirect);
-            }
-            return redirect()
-                    ->route('admin.dashboard');
-        }
-
-        return redirect()
-                ->back()
-                ->withErrors('Tài khoản mật khẩu không đúng');
-
-    }
-
-    /**
-     * Xử lý logout
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()
-                ->route('login');
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -92,7 +59,8 @@ class LoginController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = \App\Models\Order::findOrFail($id);
+        return view('backend.orders.edit', compact('order'));
     }
 
     /**
@@ -104,7 +72,13 @@ class LoginController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = \App\Models\Order::findOrFail($id);
+        $order->update($request->all());
+
+        return redirect()
+            ->back()
+            ->with('success', 'Cập nhật thành công');
+
     }
 
     /**

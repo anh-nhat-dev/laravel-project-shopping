@@ -22,7 +22,7 @@
     <section id="wrapper" class="login-register">
         <div class="login-box">
             <div class="white-box">
-                <form method="POST" class="form-horizontal form-material" id="loginform" action="">
+                <form method="POST" action="{{route('login', ['redirect' => $request['redirect'] ?? ""])}}" class="form-horizontal form-material" id="loginform" action="">
                     <h3 class="box-title m-b-20">Sign In</h3>
                     <div class="form-group ">
                         <div class="col-xs-12">

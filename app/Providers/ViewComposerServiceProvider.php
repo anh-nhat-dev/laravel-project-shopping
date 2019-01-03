@@ -38,7 +38,8 @@ class ViewComposerServiceProvider extends ServiceProvider
 
         app('view')->composer([
             'layout.fontend.head',
-            'frontend.carts'
+            'frontend.carts',
+            'frontend.checkout'
         ], \App\Composers\CartComposers::class);
     }
 }

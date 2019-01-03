@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="grand-total">
                                     <p><span><strong>Tổng cộng:</strong></span> <span>@money(($totalPrice + $totalSale), 'VND')</span></p>
-                                    <a href="" class="btn btn-primary">Thanh toán <i class="icon-arrow-right-circle"></i></a>
+                                <a href="{{route('carts.checkout')}}" class="btn btn-primary">Thanh toán <i class="icon-arrow-right-circle"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -101,5 +101,4 @@
         </div>
     </div>
 </div>
-
 @stop

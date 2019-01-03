@@ -22,6 +22,9 @@ Route::group([
 ], function(){
     Route::post('/add-to-cart', 'Frontend\CartController@addToCart')->name('add-cart');
     Route::get('/', 'Frontend\CartController@index')->name('list');
+    Route::get('/checkout', 'Frontend\CartController@checkout')->name('checkout')->middleware('cartempty');
+    Route::post('/checkout', 'Frontend\CartController@order');
+    Route::get('/checkout/success', 'Frontend\CartController@checkoutSuccess')->name('success');
 });
 
 Route::get('/logout', 'LoginController@logout')->name('logout');
@@ -45,6 +48,7 @@ Route::group([
     Route::resource('users', 'User\UserController');
     Route::resource('categories', 'Categories\CategoriesController');
     Route::resource('products', 'Products\ProductController');
+    Route::resource('orders', 'Order\OrderController');
 });
 
 
